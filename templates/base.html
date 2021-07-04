@@ -1,0 +1,106 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<title>Deteksi Kanker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deteksi Kanker</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+  <style>
+    body, html {
+      height: 100%;
+      font-family: "Inconsolata", sans-serif;
+    }
+    .bgimg {
+      background-position: center;
+      background-size: cover;
+      background-image: url("mywebsite/static/wallpaper.jpg");
+      min-height: 75%;
+    }
+    .menu {
+      display: none;
+    }
+    </style>
+    
+<body>
+
+<!-- Links (sit on top) -->
+<div class="w3-top">
+  <div class="w3-row w3-padding w3-black">
+    <div class="w3-col s3">
+      <a href="#" class="w3-button w3-block w3-black">HOME</a>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Header with image -->
+<header class="bgimg w3-display-container w3-grayscale-min" id="home" imgsrc="mywebsite/static/wallpaper.jpg">
+  <div class="w3-display-middle w3-center">
+    <span class="w3-text-white" style="font-size:90px">the<br>Cafe</span>
+  </div>
+</header>
+
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large">
+
+<!-- About Container -->
+<div class="w3-container" id="about">
+  <div class="w3-content" style="max-width:1000px">
+    <h2 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Deteksi Kanker Paru-paru</span></h2>
+    <p>Silahkan Masukkan Gambar CT Paru-paru yang sudah disiapkan. Harap memasukkan dalam bentuk RAR atau ZIP</p>
+    {% block upload %}
+      {% endblock %}
+  </div>
+</div>
+
+<!-- Menu Container -->
+<div class="w3-container" id="menu">
+  <div class="w3-content" style="max-width:1000px">
+    {% block detection %}
+    {% endblock %}
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+  <p>Template by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+  <script>
+  // Tabbed Menu
+  function openMenu(evt, menuName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("menu");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+    }
+    document.getElementById(menuName).style.display = "block";
+    evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+  }
+  document.getElementById("myLink").click();
+  </script>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  </script>
+
+</body>
+</html>

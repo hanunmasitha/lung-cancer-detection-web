@@ -1,0 +1,3 @@
+Django==1.11.17
+patool==1.12
+tensorflow==2.5.0

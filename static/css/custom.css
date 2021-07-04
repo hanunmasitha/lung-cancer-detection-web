@@ -1,0 +1,23 @@
+.custom_navbar{
+	background: linear-gradient(to right, #0066cc 0%, #ff99cc 100%);
+}
+
+.navbar_title{
+	color:#fff !important;
+}
+
+body, html {
+	height: 100%;
+	font-family: "Inconsolata", sans-serif;
+  }
+  
+  .bgimg {
+	background-position: center;
+	background-size: cover;
+	background-image: url("E:\Koding\Backend\TA Beneran\mywebsite\static\wallpaper.jpg");
+	min-height: 75%;
+  }
+  
+  .menu {
+	display: none;
+  }

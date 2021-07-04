@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block upload %}
+<button type="button"  class="btn btn-default js-upload-photos">
+  <span class="glyphicon glyphicon-cloud-upload "></span> Upload files
+</button>
+
+<form method="post" action="{% url 'fileapp:clear_database' %}">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.path }}">
+  <button type="submit" style="margin-bottom: 15px; margin-top: -35px;" class="btn btn-danger pull-right">
+    <span class="glyphicon glyphicon-trash"></span> Clear Database
+  </button>
+</form>
+{%if files%}
+  <form method="post" action="{% url 'fileapp:detection' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button style="margin-bottom: 15px; margin-top: -35px;" class="btn btn-danger pull-right">
+      <span class="glyphicon glyphicon-search"></span> Detection
+    </button>
+  </form>
+{% endif %}
+<input id="fileupload" type="file" name="file" multiple
+       accept="rar/*"
+       style="display: none;"
+       data-url="{% url 'fileapp:index' %}"
+       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+<table id="gallery" class="table table-bordered">
+  <thead>
+    <tr>
+        <th>Files</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for file in files %}
+      <tr>
+        <td><a href="{{ file.file.url }}">{{ file.file.name }}</a></td>
+      </tr>
+     {% endfor %}
+  </tbody>
+</table>
+<div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Uploading...</h4>
+      </div>
+      <div class="modal-body">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block detection %}
+  {%if visibiliy%}
+    <h2 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Hasil Deteksi Kanker Paru-paru</span></h2>
+
+    <table class="table table-bordered">
+      <tr>
+        <th rowspan="2">File</th>
+        <th colspan="3">Probabilitas</th>
+        <th rowspan="2">Result</th>
+      </tr>
+      <tr>
+        <th>Kanker</th>
+        <th>Tumor</th>
+        <th>Normal</th>
+      </tr>
+      {% for i in result%}
+      <tr>
+        <td>{{i.0}}</td>
+        <td>{{i.1}}%</td>
+        <td>{{i.2}}%</td>
+        <td>{{i.3}}%</td>
+        <td>{{i.4}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}
